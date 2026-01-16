@@ -1,0 +1,32 @@
+=>.     { MKTERB_CATALOG }.ecomm_supply_estore_silver.dim_project pr
+=>.     { MKTERB_CATALOG }.ecomm_supply_estore_silver.dim_location lo
+=>.     join { MKTERB_CATALOG }.ecomm_supply_estore_silver.dim_project pr on lo.project_id = pr.id
+=>.       { MKTERB_CATALOG }.ecomm_supply_estore_silver.dim_product pro
+=>.       { MKTERB_CATALOG }.ecomm_supply_estore_silver.fact_location_product fac
+=>.       join { MKTERB_CATALOG }.ecomm_supply_estore_silver.dim_project pr on fac.project_id = pr.id
+=>.       join { MKTERB_CATALOG }.ecomm_supply_estore_silver.dim_location lo using (zipcode_id, store_id)
+=>.       join { MKTERB_CATALOG }.ecomm_supply_estore_silver.dim_product pro using (product_id, project_id)
+=>.     { MKTERB_CATALOG }.ecomm_supply_lett_silver.dim_market mr
+=>.     join { MKTERB_CATALOG }.ecomm_supply_lett_silver.dim_supplier su using (supplier_id)
+=>.     { MKTERB_CATALOG }.ecomm_supply_lett_silver.dim_market mr
+=>.     join { MKTERB_CATALOG }.ecomm_supply_lett_silver.dim_supplier su using (supplier_id)
+=>.       { MKTERB_CATALOG }.ecomm_supply_lett_silver.fact_analytics
+=>.       { MKTERB_CATALOG }.ecomm_supply_lett_silver.dim_sku sku
+=>.       { MKTERB_CATALOG }.ecomm_supply_lett_silver.fact_analytics fac
+=>.       join { MKTERB_CATALOG }.ecomm_supply_lett_silver.dim_market dm using (market_id, supplier_id)
+=>.       join { MKTERB_CATALOG }.ecomm_supply_lett_silver.dim_sku sku using (lett_id)
+=>.     { MKTERB_CATALOG }.ecomm_supply_explode_silver.dim_store ds
+=>.     { MKTERB_CATALOG }.ecomm_supply_explode_silver.dim_store ds
+=>.     { MKTERB_CATALOG }.ecomm_supply_explode_silver.dim_product pro
+=>.       { MKTERB_CATALOG }.ecomm_supply_explode_silver.fact_osa fac
+=>.       join { MKTERB_CATALOG }.ecomm_supply_explode_silver.dim_store ds using (pincode, retailer_name, store_location)
+=>.       join { MKTERB_CATALOG }.ecomm_supply_explode_silver.dim_product pro using (product_id)
+=>.     { MKTERB_CATALOG }.ecomm_supply_dataimpacts_silver.dim_retailer dr
+=>.     { MKTERB_CATALOG }.ecomm_supply_dataimpacts_silver.dim_retailer_pos_detail ds
+=>.       { MKTERB_CATALOG }.ecomm_supply_dataimpacts_silver.dim_product_detail pro
+=>.       { MKTERB_CATALOG }.ecomm_supply_dataimpacts_silver.fact_dist_oos_day fac
+=>.       join { MKTERB_CATALOG }.ecomm_supply_dataimpacts_silver.dim_retailer_pos_detail ds using (pos, retailer_id)
+=>.       join { MKTERB_CATALOG }.ecomm_supply_dataimpacts_silver.dim_product_detail pro on lower(fac.country_code) = lower(pro.country_code)
+=>.       { MKTERB_CATALOG }.ecomm_supply_estore_silver.fact_one_view fov
+=>.       { MKTERB_CATALOG }.ecomm_supply_estore_silver.fact_one_view fov
+=>.       { MKTERB_CATALOG }.ecomm_supply_estore_silver.fact_one_view fac
